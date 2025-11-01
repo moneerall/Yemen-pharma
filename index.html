@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مؤسسة اليمن الدوائية - الرائد في توزيع الدواء في اليمن</title>
+    <meta name="description" content="مؤسسة اليمن الدوائية - توزيع الأدوية والمستلزمات الطبية في جميع أنحاء اليمن. أدوية مضمونة الجودة من شركات عالمية.">
+    
+    <!-- مكتبات -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* سيتم إضافة الأنماط هنا مؤقتاً حتى يتم تحميل CSS */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+    <!-- شاشة التحميل -->
+    <div class="loading" id="loading">
+        <div style="text-align: center;">
+            <div style="width: 60px; height: 60px; border: 4px solid #f3f3f3; border-top: 4px solid #003366; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 20px;"></div>
+            <p>جاري تحميل مؤسسة اليمن الدوائية...</p>
+        </div>
+    </div>
+
+    <!-- شريط التنقل -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-clinic-medical"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>مؤسسة اليمن الدوائية</h1>
+                    <span>الرائدة في توزيع الدواء</span>
+                </div>
+            </div>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="nav-link active" data-section="home">الرئيسية</a></li>
+                <li><a href="#about" class="nav-link" data-section="about">من نحن</a></li>
+                <li><a href="#products" class="nav-link" data-section="products">المنتجات</a></li>
+                <li><a href="#services" class="nav-link" data-section="services">الخدمات</a></li>
+                <li><a href="#contact" class="nav-link" data-section="contact">اتصل بنا</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <div class="search-box">
+                    <input type="text" id="globalSearch" placeholder="ابحث عن دواء...">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="nav-buttons">
+                    <button class="nav-btn" id="userBtn">
+                        <i class="fas fa-user"></i>
+                    </button>
+                    <button class="nav-btn cart-btn" id="cartBtn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-badge" id="cartBadge">0</span>
+                    </button>
+                </div>
+                <button class="mobile-menu" id="mobileMenu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- سلة المشتريات -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3><i class="fas fa-shopping-cart"></i> سلة المشتريات</h3>
+            <button class="close-btn" id="closeCart">&times;</button>
+        </div>
+        <div class="cart-body">
+            <div class="cart-items" id="cartItems">
+                <!-- سيتم ملؤه بالجافاسكريبت -->
+            </div>
+            <div class="cart-summary">
+                <div class="summary-row">
+                    <span>المجموع:</span>
+                    <span id="cartSubtotal">0 ريال</span>
+                </div>
+                <div class="summary-row">
+                    <span>رسوم الشحن:</span>
+                    <span id="cartShipping">0 ريال</span>
+                </div>
+                <div class="summary-row total">
+                    <span>الإجمالي:</span>
+                    <span id="cartTotal">0 ريال</span>
+                </div>
+                <button class="btn btn-primary checkout-btn" id="checkoutBtn">
+                    <i class="fas fa-credit-card"></i> إتمام الشراء
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- المحتوى الرئيسي -->
+    <main class="main-content">
+        <!-- قسم الرئيسية -->
+        <section id="home" class="section active">
+            <div class="hero">
+                <div class="hero-background">
+                    <div class="hero-overlay"></div>
+                </div>
+                <div class="hero-content">
+                    <div class="container">
+                        <h1 class="hero-title">الرائد في توزيع الدواء في اليمن</h1>
+                        <p class="hero-description">نوفر حلولاً دوائية متكاملة وموثوقة، نضمن وصول الدواء الآمن والفعال إلى كل ركن من أراضي الوطن</p>
+                        <div class="hero-actions">
+                            <button class="btn btn-primary" onclick="showSection('products')">
+                                <i class="fas fa-search"></i> ابحث في الأدوية
+                            </button>
+                            <button class="btn btn-secondary" onclick="showSection('about')">
+                                <i class="fas fa-info-circle"></i> تعرف على خدماتنا
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- الإحصائيات -->
+            <div class="stats-section">
+                <div class="container">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-pills"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3>+750</h3>
+                                <p>دواء متوفر</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3>+75</h3>
+                                <p>شريك دولي</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3>15</h3>
+                                <p>فرع في اليمن</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3>+2500</h3>
+                                <p>عميل راضٍ</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم من نحن -->
+        <section id="about" class="section">
+            <div class="container">
+                <h2 class="section-title">من نحن</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p class="about-description">
+                            مؤسسة اليمن الدوائية هي الرائدة في مجال توزيع الأدوية والمستلزمات الطبية في الجمهورية اليمنية. 
+                            نعمل منذ عام 2005 على توفير أدوية مضمونة الجودة من شركات عالمية مرموقة.
+                        </p>
+                        <div class="features-grid">
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>تراخيص معتمدة من وزارة الصحة</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>شهادات جودة عالمية (ISO 9001)</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>فريق طبي متخصص</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>نظام توزيع يغطي جميع المحافظات</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم المنتجات -->
+        <section id="products" class="section">
+            <div class="container">
+                <h2 class="section-title">منتجاتنا الدوائية</h2>
+                
+                <!-- شريط البحث والتصفية -->
+                <div class="products-controls">
+                    <div class="search-container">
+                        <div class="search-box">
+                            <input type="text" id="productSearch" placeholder="ابحث عن دواء أو منتج...">
+                            <button class="search-btn" onclick="searchProducts()">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="filters-container">
+                        <select id="categoryFilter" class="filter-select" onchange="filterProducts()">
+                            <option value="">جميع الفئات</option>
+                            <option value="مضادات حيوية">مضادات حيوية</option>
+                            <option value="مسكنات">مسكنات</option>
+                            <option value="مستلزمات طبية">مستلزمات طبية</option>
+                            <option value="فيتامينات">فيتامينات</option>
+                            <option value="أدوية مزمنة">أدوية مزمنة</option>
+                        </select>
+                        
+                        <select id="sortFilter" class="filter-select" onchange="sortProducts()">
+                            <option value="name">الترتيب بالأسم</option>
+                            <option value="price">الترتيب بالسعر</option>
+                            <option value="category">الترتيب بالفئة</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- شبكة المنتجات -->
+                <div class="products-grid" id="productsGrid">
+                    <!-- سيتم ملؤه بالجافاسكريبت -->
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم الخدمات -->
+        <section id="services" class="section">
+            <div class="container">
+                <h2 class="section-title">خدماتنا</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <h3>التوزيع واللوجستيات</h3>
+                        <p>شبكة توزيع شاملة تغطي جميع محافظات اليمن بأسطول حديث ومجهز</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3>الدعم الفني</h3>
+                        <p>فريق دعم فني متخصص للإجابة على استفسارات الصيادلة والأطباء</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-clipboard-check"></i>
+                        </div>
+                        <h3>ضمان الجودة</h3>
+                        <p>نظام متكامل لمراقبة الجودة وفق أعلى المعايير الدولية</p>
+                    </div>
+
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h3>تخزين البيانات</h3>
+                        <p>نظام آمن لتخزين وإدارة بيانات العملاء والمنتجات</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم اتصل بنا -->
+        <section id="contact" class="section">
+            <div class="container">
+                <h2 class="section-title">اتصل بنا</h2>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>العنوان</h3>
+                                <p>صنعاء - شارع الستين - مبنى مؤسسة اليمن الدوائية</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>الهاتف</h3>
+                                <p>+967 1 123456</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>البريد الإلكتروني</h3>
+                                <p>info@yemenpharma.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>ساعات العمل</h3>
+                                <p>الأحد - الخميس: 8:00 ص - 4:00 م</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <form class="contact-form" id="contactForm">
+                        <h3>أرسل رسالة</h3>
+                        <div class="form-group">
+                            <input type="text" placeholder="الاسم الكامل" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="البريد الإلكتروني" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="الموضوع" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="نص الرسالة" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> إرسال الرسالة
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- التذييل -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-clinic-medical"></i>
+                        <h3>مؤسسة اليمن الدوائية</h3>
+                    </div>
+                    <p class="footer-description">
+                        الرائد في توزيع الدواء في اليمن منذ 2005. نضمن وصول الدواء الآمن والفعال إلى كل ركن من أراضي الوطن.
+                    </p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>روابط سريعة</h4>
+                    <a href="#home" onclick="showSection('home')">الرئيسية</a>
+                    <a href="#about" onclick="showSection('about')">من نحن</a>
+                    <a href="#products" onclick="showSection('products')">المنتجات</a>
+                    <a href="#services" onclick="showSection('services')">الخدمات</a>
+                    <a href="#contact" onclick="showSection('contact')">اتصل بنا</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>خدماتنا</h4>
+                    <a href="#products">توزيع الأدوية</a>
+                    <a href="#services">المستلزمات الطبية</a>
+                    <a href="#services">الدعم الفني</a>
+                    <a href="#services">الاستشارات الطبية</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>معلومات الاتصال</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> صنعاء - شارع الستين</p>
+                        <p><i class="fas fa-phone"></i> +967 1 123456</p>
+                        <p><i class="fas fa-envelope"></i> info@yemenpharma.com</p>
+                        <p><i class="fas fa-clock"></i> الأحد - الخميس: 8:00 ص - 4:00 م</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 مؤسسة اليمن الدوائية. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- النماذج المنبثقة -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('loginModal')">&times;</button>
+            <h2>تسجيل الدخول</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <input type="email" placeholder="البريد الإلكتروني" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="كلمة المرور" required>
+                </div>
+                <button type="submit" class="btn btn-primary">تسجيل الدخول</button>
+            </form>
+            <p class="modal-footer">ليس لديك حساب؟ <a href="#" onclick="showRegister()">إنشاء حساب</a></p>
+        </div>
+    </div>
+
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('registerModal')">&times;</button>
+            <h2>إنشاء حساب جديد</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <input type="text" placeholder="الاسم الكامل" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="البريد الإلكتروني" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" placeholder="رقم الهاتف" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="كلمة المرور" required>
+                </div>
+                <button type="submit" class="btn btn-primary">إنشاء حساب</button>
+            </form>
+            <p class="modal-footer">لديك حساب؟ <a href="#" onclick="showLogin()">تسجيل الدخول</a></p>
+        </div>
+    </div>
+
+    <!-- الأزرار العائمة -->
+    <div class="floating-buttons">
+        <button class="floating-btn whatsapp-btn" onclick="openWhatsApp()">
+            <i class="fab fa-whatsapp"></i>
+        </button>
+        <button class="floating-btn chat-btn" onclick="openChat()">
+            <i class="fas fa-comment"></i>
+        </button>
+        <button class="floating-btn phone-btn" onclick="callUs()">
+            <i class="fas fa-phone"></i>
+        </button>
+        <button class="floating-btn scroll-top" onclick="scrollToTop()">
+            <i class="fas fa-chevron-up"></i>
+        </button>
+    </div>
+
+    <!-- ربط ملفات الموقع -->
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</body>
+</html>
